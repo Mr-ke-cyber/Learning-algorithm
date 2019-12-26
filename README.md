@@ -1,9 +1,10 @@
 # Learning-algorithm
-learn algorithm 
 
-#theoretical Knowledge
+学习经典的算法理论并用于实践，融会贯通。 
 
-#demos
+#理论知识
+
+#实例
 
 
 
