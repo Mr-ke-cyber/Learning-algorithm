@@ -1,2 +1,19 @@
 # Learning-algorithm
-learn algorithm by javascript
+learn algorithm 
+
+#theoretical Knowledge
+
+#demos
+
+
+
+
+
+###感悟
+
+*天下难事，必作于易；天下大事，必作于细。
+
+*不论在什么行业什么领域，提高技能与能力的最有效方法都遵循最基本的原则，就是大量重复练习，学习更是如此，只有在一次有一次的练习中才能领悟其内在。
+
+*反复练习和观摩是技能精进的重要手段，自律是达成目标的基石。
+
