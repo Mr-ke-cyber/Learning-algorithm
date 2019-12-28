@@ -23,6 +23,7 @@ let employeeImportance = function (employees, target) {
         if (employees[i][0] === target) {
             currNode = employees[i];
             sumImportance += employees[i][1];
+            break;
         }
         i++;
     }
