@@ -16,9 +16,9 @@ let quickSort = function (array) {
     if (array.length < 2) {
         return array;
     }
-    const target = array[0];
-    const left = [];
-    const right = [];
+    let target = array[0];
+    let left = [];
+    let right = [];
     for (let i = 1; i < array.length; i++) {
         if (array[i] < target) {
             left.push(array[i]);
