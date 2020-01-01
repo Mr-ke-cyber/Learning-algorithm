@@ -158,20 +158,72 @@
 //     return 0;
 // };
 /*最小基因变化解法二*/
+// let ladderLength = function (beginWord, endWord, wordList) {
+//     let comboDicts = new Set(wordList);
+//     if(!comboDicts.has(endWord)){
+//         return 0;
+//     }
+//     let level = 0;
+//     let len = beginWord.length;
+//     let queue = [[beginWord, 1]];
+//     while (queue.length > 0) {
+//         let currNode = queue.pop();
+//         let currWord = currNode[0];
+//         level = currNode[1];
+//         if (currWord === endWord) {
+//             return level;
+//         }
+//         for (let i = 0; i < len; i++) {
+//             for (let j = 0; j < 26; j++) {
+//                 let newLetter = String.fromCharCode(97 + j);
+//                 if (currWord[i] !== newLetter) {
+//                     let str = currWord.slice(0, i) + newLetter + currWord.slice(i + 1);
+//                     if (comboDicts.has(str)){
+//                         queue.unshift([str, level + 1]);
+//                         comboDicts.delete(str);
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     return 0;
+// };
+
+/*双端BFS强化版解法*/
 let ladderLength = function (beginWord, endWord, wordList) {
     let comboDicts = new Set(wordList);
     if(!comboDicts.has(endWord)){
         return 0;
     }
+    let beginSet = new Set();
+    beginSet.add(beginWord);
+    let endSet = new Set();
+    endSet.add(endWord);
+    let visited = new Set();
     let level = 1;
-    let queue = [[beginWord, 1]];
-    while (queue.length > 0) {
-        let currNode = queue.pop();
-
+    while (beginSet.size > 0 && endSet.size > 0) {
+        if (beginSet.size > endSet.size) {
+            let tmp = beginSet;
+            beginSet = endSet;
+            endSet = tmp;
+        }
+        let temp = new Set();
+        for (let key of beginSet){
+            for (let i = 0; i < key.length; i++) {
+                for(let j = 0; j < 26; j++) {
+                    let tmp = key.slice(0, i) + String.fromCharCode(97 + j) + key.slice(i+1);
+                    if (endSet.has(tmp)) return level + 1;
+                    if (!visited.has(tmp) && comboDicts.has(tmp)) {
+                        temp.add(tmp);
+                        visited.add(tmp);
+                    }
+                }
+            }
+        }
+        beginSet = temp;
+        level++;
     }
-    return 0;
 };
-
 
 let result = ladderLength('hit', 'cog', ["hot","dot","dog","lot","log","cog"]);
 console.log(result);
