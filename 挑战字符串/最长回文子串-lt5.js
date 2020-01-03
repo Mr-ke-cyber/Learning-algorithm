@@ -38,13 +38,41 @@ var longestPalindrome = function (s) {
     return longestPalindromeStr;
 };
 
+//中心扩散解法
+// 技巧：回文串的长度是奇数和偶数的时候，回文中心是不一样的。
+let longestPalindrome2 = function (s) {
+    if(s.length < 2) return s;
+    let longestPalindrome = 1;
+    let longestPalindromeStr = s.charAt(0);
+    for (let i = 0; i < s.length - 1; i++) {
+        let oddStr = centerSpread(s, i, i);
+        let evenStr = centerSpread(s,i, i + 1);
+        let maxlenStr = oddStr.length > evenStr.length ? oddStr : evenStr;
+        if (maxlenStr.length > longestPalindrome) {
+            longestPalindrome = maxlenStr.length;
+            longestPalindromeStr = maxlenStr
+        }
+    }
+    return longestPalindromeStr;
+};
+
+let centerSpread = function (s, left, right) {
+    let len = s.length;
+    let i = left;
+    let j = right;
+    while (i >= 0 && j < len) {
+        if (s.charAt(i) === s.charAt(j)) {
+            i--;
+            j++;
+        } else {
+            break;
+        }
+    }
+    return s.substring(i + 1, j);
+};
 
 
-
-
-
-
-let result = longestPalindrome("cbbd");
+let result = longestPalindrome2("ecbabcefadce");
 console.log(result);
 
 
