@@ -17,6 +17,7 @@
  * @param {number} x
  * @return {number}
  */
+// 暂提供这一种解法
 var reverse = function(x) {
     let flag = x < 0 ? -1 : 1;
     x = Math.abs(x) + '';
