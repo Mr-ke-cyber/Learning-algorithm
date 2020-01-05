@@ -9,7 +9,7 @@
 //
 //     如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。
 
-var maxSubArray = function(nums) {
+var maxSubArrayLt53 = function(nums) {
     let len = nums.length;
     let dp = Array(len).fill(0);
     let maxSum = nums[0];
@@ -22,7 +22,7 @@ var maxSubArray = function(nums) {
     }
     return maxSum;
 };
-let result = maxSubArray([-3,4,-1,2,1,-5,4]);
+let result = maxSubArrayLt53([-3,4,-1,2,1,-5,4]);
 console.log(result);
 
 
