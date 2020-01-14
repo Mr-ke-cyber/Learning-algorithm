@@ -1,17 +1,34 @@
+// 给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。
+// 示例 1:
+// 输入: amount = 5, coins = [1, 2, 5]
+// 输出: 4
+// 解释: 有四种方式可以凑成总金额:
+// 5=5
+// 5=2+2+1
+// 5=2+1+1+1
+// 5=1+1+1+1+1
+// 示例 2:
+// 输入: amount = 3, coins = [2]
+// 输出: 0
+// 解释: 只用面额2的硬币不能凑成总金额3。
+// 示例 3:
+// 输入: amount = 10, coins = [10]
+// 输出: 1
 /**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
+ * @param {number} amount
+ * @param {number[]} coins
+ * @return {number}
  */
-var twoSum = function(nums, target) {
-    const map = {};
-    for (let i = 0; i < nums.length; i++) {
-        const another = target - nums[i];
-        if (another in map) {
-            return [map[another], i]
-        }
-        map[nums[i]] = i
-    }
+let change = function(amount, coins) {
+     let dp = Array(amount + 1).fill(0);
+     dp[0] = 1;
+     for (let i = 0; i < coins.length; i++) {
+         for (let j = coins[i]; j <= amount; j++) {
+             dp[j] += dp[j - coins[i]]
+         }
+     }
+     return dp[amount]
 };
-let result = twoSum([1,3,4,2], 6);
+let result = change(6,[3,5,7]);
 console.log(result);
+
