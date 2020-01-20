@@ -29,18 +29,20 @@ var largestSumAfterKNegations = function(A, K) {
         });
     };
     let i = 0;
+    let odd = 0;
     while (i < K) {
         if (A[i] < 0) {
             A[i] = -A[i];
+            odd++;
         } else if (A[i] === 0) {
             break;
         } else {
             let left = K - i;
             A = A.sort((a,b) => a - b);
-            if (left % 2 !== 0) {
+            if (left % 2 !== 0) {                 // 此处是关键点 经过排序并取反后，前面的均已为正数，故只需要判断剩下的K次是奇数还是偶数即可，若是奇数，则需要再次取反。
                 A[0] = -A[0];
-                break;
             }
+            break;
         }
         i++;
     }
