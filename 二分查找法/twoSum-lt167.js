@@ -18,12 +18,18 @@
  */
 var twoSum = function(numbers, target) {
     let len = numbers.length;
-    let mid = Math.floor(len / 2);
-
-    let left = target - numbers[mid];
-    
-
-
+    let left = Math.floor(len / 2);
+    let right = len - 1;
+    while(left < len) {
+        let rightV = target - numbers[left];
+        right = numbers.indexOf(rightV, left + 1); // 此处需注意左右索引不可以相同，故找右边索引的起始索引要加1
+        if (right < 0 || left === right) {
+            left--;
+        } else {
+            break;
+        }
+    }
+    return [left + 1, right + 1];
 };
-let result = twoSum([3,24,50,79,88,150,345], 200);
+let result = twoSum([0, 0, 3, 4], 0);
 console.log(result);
