@@ -31,5 +31,20 @@ var twoSum = function(numbers, target) {
     }
     return [left + 1, right + 1];
 };
-let result = twoSum([0, 0, 3, 4], 0);
+var twoSum2 = function(numbers, target) {
+    let left = 0;
+    let right = numbers.length - 1;
+    while (left < right) {
+        let currSum = numbers[left] + numbers[right];
+        if (currSum < target) {
+            left++;
+        } else if (currSum > target) {
+            right--;
+        } else {
+            break;
+        }
+    }
+    return[left + 1, right + 1];
+};
+let result = twoSum2([2, 7, 11, 15], 9);
 console.log(result);
