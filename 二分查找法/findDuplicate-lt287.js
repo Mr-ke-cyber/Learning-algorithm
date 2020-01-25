@@ -28,7 +28,23 @@ var findDuplicate = function(nums) {
         }
     }
 };
-let result = findDuplicate([3,1,3,4,2]);
+/** 这种解法略难理解*/
+var findDuplicate2 = function(nums) {
+    let tortoise = nums[0];
+    let hare = nums[0];
+    do {
+        tortoise = nums[tortoise];
+        hare = nums[nums[hare]];
+    } while (tortoise !== hare);
+    let ptr1 = nums[0];
+    let ptr2 = tortoise;
+    while (ptr1 !== ptr2) {
+        ptr1 = nums[ptr1];
+        ptr2 = nums[ptr2];
+    }
+    return ptr1;
+};
+let result = findDuplicate2([3,1,3,4,2]);
 console.log(result, 'jjj');
 
 
