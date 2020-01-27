@@ -30,6 +30,22 @@ var intersection = function(nums1, nums2) {
     }
     return result;
 };
+/***应用es6高级点的解法**/
+let intersection2 = function (nums1, nums2) {
+    nums1 = new Set(nums1);
+    nums2 = new Set(nums2);
+    let flag = nums1.size > nums2.size;
+    let result = new Set();
+    let temp = flag ? nums2 : nums1;
+    let temp2 = flag ? nums1 : nums2;
+    for (let v of temp) {
+        if (temp2.has(v)) {
+            result.add(v);
+        }
+    }
+    return Array.from(result);
+};
 
-let result = intersection([4,9,5], [9,4,9,8,4]);
+
+let result = intersection2([1,2,2,1], [2,2]);
 console.log(result);
