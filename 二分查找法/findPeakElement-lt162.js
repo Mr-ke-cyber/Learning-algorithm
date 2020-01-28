@@ -16,6 +16,7 @@
  * @param {number[]} nums
  * @return {number}
  */
+/*方法一：时间复杂度 O(n) 空间复杂度 O（1） 不满足题目要求，需要更小的时间复杂度的解法*/
 var findPeakElement = function(nums) {
     if (nums.length === 1) return 0;    // 只有一个元素的情况  极端情况不可漏
     let len = nums.length;
