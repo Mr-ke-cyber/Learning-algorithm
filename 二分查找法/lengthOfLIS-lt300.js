@@ -26,5 +26,28 @@ var lengthOfLIS = function(nums) {
     }
     return Math.max(...dp);
 };
-let result = lengthOfLIS([1, 3, 6, 7, 9, 4, 10, 5, 6]);
+/*方法二：动态规划 ＋ 二分查找*/
+var lengthOfLIS2 = function (nums) {
+    let len = nums.length;
+    let tails = Array(len).fill(0);
+    let res = 0;
+    for (let num of nums) {
+        let i = 0;
+        let j = res;
+        while ( i < j) {
+            let m = Math.floor((i + j) / 2);
+            if (tails[m] < num) {
+                i = m + 1;
+            } else {
+                j = m;
+            }
+        }
+        tails[i] = num;
+        if (res === j) {
+            res++;
+        }
+    }
+    return res;
+};
+let result = lengthOfLIS2([1, 3, 6, 7, 9, 4, 10, 5, 6]);
 console.log(result, 'jla');
