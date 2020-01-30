@@ -29,6 +29,26 @@ var minSubArrayLen = function(s, nums) {
     }
     return result === Number.MAX_SAFE_INTEGER ? 0 : result; // 此处需注意边界条件
 };
-let result = minSubArrayLen(7,[2,3,1,2,4,3]);
+/*方法二：暴力法*/
+let minSubArrayLen2 = function (s, nums) {
+    let len = nums.length;
+    let sum = Array(len).fill(0);
+    sum[0] = nums[0];
+    for (let i = 1; i < len; i++) {
+        sum[i] = sum[i - 1] + nums[i];   /*注意此处构造的单调递增数组，为下一个二分查找法创造条件*/
+    }
+    let result = Number.MAX_SAFE_INTEGER;
+    for (let i = 0; i < len; i++) {
+        let s2 = s - nums[i];
+        for (let j = i; j < len; j++) {
+            if (sum[j] - sum[i] >= s2) {
+                result = Math.min(result, j - i + 1);
+                break;
+            }
+        }
+    }
+    return result === Number.MAX_SAFE_INTEGER ? 0 :result;
+};
+let result = minSubArrayLen2(7,[2,3,1,2,4,3]);
 console.log(result);
 
