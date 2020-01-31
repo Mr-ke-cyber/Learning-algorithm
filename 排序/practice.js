@@ -1,18 +1,26 @@
 //练习本专题下的算法题
-let count = 0;
-function bubbleSort(array) {
-    for (let i = 0; i < array.length; i++) {
-        let complete = true;
-        for (let j = i + 1; j < array.length; j++) {
-            count++;
-            if ( array[i] > array[j]) {
-                complete = false;
-                [array[i], array[j]] = [array[j], array[i]];
-            }
+function mergeSort(array) {
+    if (array.length < 2) return array;
+    let mid = Math.floor(array.length / 2);
+    let left = array.slice(0, mid);
+    let right = array.slice(mid);
+    let temp = [];
+    while(left.length && right.length) {
+        if (left[0] < right[0]) {
+            temp.push(left.shift())
+        } else {
+            temp.push(right.shift())
         }
-        if (complete) break;
     }
-    return array
+    while (left.length) {
+        temp.push(left.shift());
+    }
+    while (right.length) {
+        temp.push(right.shift());
+    }
+    return array;
 }
-let result = bubbleSort([1, 2, 4, 6, 9, 3, 8]);
-console.log(result, count);
+let result = mergeSort([7, 4, 22, 6, 9, 3, 8]);
+console.log(result, 'counta');
+
+
