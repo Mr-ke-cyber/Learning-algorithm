@@ -15,6 +15,7 @@
  * @param {number} x
  * @return {number[]}
  */
+/*方法一：二分查找法 较繁琐*/
 var findClosestElements = function(arr, k, x) {
     let len = arr.length;
     let result = [];
@@ -67,5 +68,23 @@ var findClosestElements = function(arr, k, x) {
     }
     return result;
 };
-let result = findClosestElements([1,2,3,3,6,6,7,7,9,9], 8,8);
+/*方法二：双指针法 此方法其实是在上述方法上的优化，前述方法其实不需要找出x的大概位置即可*/
+var findClosestElements2 = function (arr, k, x) {
+    let len = arr.length;
+    let l = 0;
+    let r = len - 1;
+    let j = 0;
+    while (j < len - k) {
+        let a = Math.abs(arr[l] - x);
+        let b = Math.abs(arr[r] - x);
+        if (a > b) {
+            l++;
+        } else {
+            r--;
+        }
+        j++;
+    }
+    return arr.slice(l, r + 1);
+};
+let result = findClosestElements2([1,2,3,4,5], 4,-1);
 console.log(result);
