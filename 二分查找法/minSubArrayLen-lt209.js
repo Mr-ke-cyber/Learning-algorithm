@@ -49,6 +49,38 @@ let minSubArrayLen2 = function (s, nums) {
     }
     return result === Number.MAX_SAFE_INTEGER ? 0 :result;
 };
-let result = minSubArrayLen2(7,[2,3,1,2,4,3]);
+/*方法三：二分法*/
+var minSubArrayLen3 = function (s, nums) {
+    let len = nums.length;
+    let sum = Array(len).fill(0);
+    let result = Number.MAX_SAFE_INTEGER;
+    const findIndex = function (l, r, sum, target) {
+        let mid = -1;
+        while (l <= r) {
+            mid = Math.floor((l + r) / 2);
+            if (sum[mid] > target) {
+                r = mid - 1;
+            } else if (sum[mid] < target) {
+                l = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return sum[mid] > target ? mid : -1;
+    }
+    for (let i = 1; i < len; i++) {
+        sum[i] = nums[i] + sum[i - 1];
+    }
+    for (let i = 0; i < len; i++) {
+       /*要求sum[j] - sum[i] >=  s2  只需要求sum[j] >= s2 + sum[i]*/
+       let s2 = s - nums[i];
+       let k = findIndex(i, len - 1, sum, s2 + sum[i]);
+       if (k !== -1) {
+           result = Math.min(result, k - i + 1);
+       }
+    }
+    return result === Number.MAX_SAFE_INTEGER ? 0 : result;
+};
+let result = minSubArrayLen3(7,[2,3,1,2,4,3]);
 console.log(result);
 
