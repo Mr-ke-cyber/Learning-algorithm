@@ -35,6 +35,23 @@ var isPalindrome = function(s) {
     }
     return true;
 };
-
-let result = isPalindrome("0P");
+// 方法二：转换为数组
+var isPalindrome2 = function (s) {
+    let temp = [];
+    let reg = /^[a-zA-Z0-9]$/;
+    s = s.toLowerCase();
+    for (let i = 0; i < s.length; i++) {
+        if (reg.test(s[i])) {
+            temp.push(s[i]);
+        }
+    }
+    return temp.join("") === temp.reverse().join("");
+};
+/*方法三：正则匹配*/
+var isPalindrome3 = function (s) {
+    s = s.replace(/[^0-9a-zA-Z]/g,'').toLowerCase();
+    let arr = s.split("");
+    return arr.reverse().join("") === s;
+};
+let result = isPalindrome3("race :,l()a car");
 console.log(result);
