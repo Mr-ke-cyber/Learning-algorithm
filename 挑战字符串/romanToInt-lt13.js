@@ -61,9 +61,9 @@ var romanToInt = function(s) {
     };
     for (let i = 0; i < len; i++) {
         let flag1 = s.charAt(i);
-        let flag2 = s.charAt(i + 1) ? s.charAt(i + 1) : 0;
+        let flag2 = s.charAt(i + 1);
         let curr = map[flag1];
-        let next = map[flag2];
+        let next = flag2 ? map[flag2] : 0;
         if (curr < next) {
             result += next - curr;
             i++;
@@ -73,5 +73,41 @@ var romanToInt = function(s) {
     }
     return result;
 };
-let result = romanToInt("MCMXCIV");
+var romanToInt2 = function (s) {
+    const getValue = function (char) {
+        switch (char) {
+            case "I" :
+                return 1;
+            case "V":
+                return 5;
+            case "X" :
+                return 10;
+            case "L":
+                return 50;
+            case "C" :
+                return 100;
+            case "D":
+                return 500;
+            case "M":
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+    let result = 0;
+    for (let i = 0; i < s.length; i++) {
+        let char1 = s[i];
+        let char2 = s[i + 1];
+        let v1 = getValue(char1);
+        let v2 = getValue(char2);
+        if (v1 < v2) {
+            result += v2 - v1;
+            i++;
+        } else {
+            result += v1;
+        }
+    }
+    return result;
+};
+let result = romanToInt2("MCMXCIV");
 console.log(result);
