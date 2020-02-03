@@ -35,4 +35,34 @@ var generateParenthesis = function(n) {
     dfs("", n, n, result);
     return result;
 };
-let result = generateParenthesis (2);console.log(result);
+/*方法二：广度优先遍历*/
+var generateParenthesis2 = function (n) {
+    class Node {
+        constructor(str, l, r) {
+            this.res = str;
+            this.l = l;
+            this.r = r;
+        }
+    }
+    let res = [];
+    if (n === 0) {
+        return res;
+    }
+    let queue = [];
+    queue.push(new Node("", n, n));
+    while (queue.length > 0) {
+        let curNode = queue.shift();
+        if (curNode.l === 0 && curNode.r === 0) {
+            res.push(curNode.res);
+        }
+        if (curNode.l > 0) {
+            queue.push(new Node(curNode.res + "(", curNode.l - 1, curNode.r));
+        }
+        if (curNode.r > 0 && curNode.l < curNode.r) {
+            queue.push(new Node(curNode.res + ")", curNode.l, curNode.r - 1));
+        }
+    }
+    return res;
+};
+let result = generateParenthesis2 (3);
+console.log(result);
