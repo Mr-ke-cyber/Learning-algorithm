@@ -34,7 +34,7 @@ var characterReplacement = function(s, k) {
         let index = c.charCodeAt(0) - 97;
         alpha[index]++;
         maxCount = Math.max(maxCount, alpha[index]);
-        if (r - l + 1 - maxCount > k) {     // 总长度减去出现次数最多的，就是需要变换的字母的数量，将其和k进行比对
+        if (r - l + 1 - maxCount > k) {     // 总长度减去出现次数最多的，就是需要变换的字母的数量，将其和k进行比对 此处maxCount按道理是应该更新的，但是实际上不需要，因为只是起到一个标志作用
             let d = s[l].toLowerCase().charCodeAt(0) - 97;
             alpha[d]--;
             l++;
