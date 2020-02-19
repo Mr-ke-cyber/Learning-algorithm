@@ -3,7 +3,7 @@ let selectionSort = function (Array) {
     for (let i = 0; i < len; i++) {
         let minIndex = i;
         for (let j = i + 1; j < len; j++) {
-            if (Array[j] < Array[i]) {
+            if (Array[j] < Array[minIndex]) {
                 minIndex = j;
             }
         }
@@ -11,5 +11,5 @@ let selectionSort = function (Array) {
     }
     return Array;
 };
-let result = selectionSort([1,22,5,2,6,9,2,333]);
+let result = selectionSort([3, 1, 4, 6, 9, 2, 8]);
 console.log(result);
