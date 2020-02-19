@@ -1,26 +1,15 @@
-//练习本专题下的算法题
-function mergeSort(array) {
-    if (array.length < 2) return array;
-    let mid = Math.floor(array.length / 2);
-    let left = array.slice(0, mid);
-    let right = array.slice(mid);
-    let temp = [];
-    while(left.length && right.length) {
-        if (left[0] < right[0]) {
-            temp.push(left.shift())
-        } else {
-            temp.push(right.shift())
+let selectionSort = function (Array) {
+    let len = Array.length;
+    for (let i = 0; i < len; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < len; j++) {
+            if (Array[j] < Array[i]) {
+                minIndex = j;
+            }
         }
+        [Array[minIndex], Array[i]] = [Array[i], Array[minIndex]];
     }
-    while (left.length) {
-        temp.push(left.shift());
-    }
-    while (right.length) {
-        temp.push(right.shift());
-    }
-    return array;
-}
-let result = mergeSort([7, 4, 22, 6, 9, 3, 8]);
-console.log(result, 'counta');
-
-
+    return Array;
+};
+let result = selectionSort([1,22,5,2,6,9,2,333]);
+console.log(result);
