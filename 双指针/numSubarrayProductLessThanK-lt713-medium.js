@@ -25,7 +25,7 @@ var numSubarrayProductLessThanK = function(nums, k) {
         while (prod >= k) {
             prod /= nums[l++];
         }
-        res += r - l + 1;
+        res += r - l + 1;     //  r - l + 1表示以右元素r结尾的子数组的个数，再加上前面的总和，即可得到总得子数组个数，非常类似于动态规划
     }
     return res;
 };
