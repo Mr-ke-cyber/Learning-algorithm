@@ -2,6 +2,7 @@
 
 // 时间复杂度：0（n2）
 // 空间复杂度：O（1）
+// 稳定性：不稳定
 
 let selectionSort = function (array) {
     for(let i = 0; i < array.length; i++) {

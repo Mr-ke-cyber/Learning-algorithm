@@ -1,15 +1,15 @@
-let selectionSort = function (Array) {
+let insertSort = function (Array) {
     let len = Array.length;
-    for (let i = 0; i < len; i++) {
-        let minIndex = i;
-        for (let j = i + 1; j < len; j++) {
-            if (Array[j] < Array[minIndex]) {
-                minIndex = j;
+    for (let i = 1; i < len; i++) {
+        let target = i;
+        for (let j = i - 1; j >= 0; j--) {
+            if (Array[j] > Array[target]) {
+                [Array[target], Array[j]] = [Array[j],Array[target]];
+                target = j;
             }
         }
-        [Array[minIndex], Array[i]] = [Array[i], Array[minIndex]];
     }
     return Array;
 };
-let result = selectionSort([3, 1, 4, 6, 9, 2, 8]);
+let result = insertSort([3, 1, 4, 6, 9, 2, 8]);
 console.log(result);
