@@ -16,7 +16,9 @@
  * @param {number[][]} matrix
  * @param {number} target
  * @return {boolean}
+ * 乍一开始用的是二分法，耗时140ms，尽管通过了，后来发现题意是从上到下递增，从左到右也是递增的，故需要改进
  */
+/*解法一：二分法*/
 var searchMatrix = function(matrix, target) {
     for (let i = 0; i < matrix.length; i++) {
         let curr = matrix[i];
@@ -30,17 +32,34 @@ var searchMatrix = function(matrix, target) {
                 let mid = l + ((r - l) >> 1);
                 if (curr[mid] > target) {
                     r = mid - 1;
-                } else if (curr[mid] === target) {
-                    return true;
-                } else {
+                } else if (curr[mid] < target) {
                     l = mid + 1;
+                } else {
+                    return true;
                 }
             }
         }
     }
     return false;
 };
-let result = searchMatrix([
+/*方法二：*/
+let searchMatrix2 = function (matrix, target) {
+    if (!matrix || matrix.length === 0) return false;
+    let row = matrix.length - 1;
+    let col = 0;
+    let len = matrix[0].length;
+    while (row >= 0 && col < len) {
+        if (matrix[row][col] < target) {
+            col++;
+        } else if (matrix[row][col] > target) {
+            row--;
+        } else {
+            return true;
+        }
+    }
+    return false;
+};
+let result = searchMatrix2([
     [1,   4,  7, 11, 15],
     [2,   5,  8, 12, 19],
     [3,   6,  9, 16, 22],
