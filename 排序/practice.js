@@ -1,15 +1,17 @@
-let insertSort = function (Array) {
+let quickSort = function (Array) {
     let len = Array.length;
+    if (len < 2) return Array;
+    let left = [];
+    let right = [];
+    let target = Array[0];
     for (let i = 1; i < len; i++) {
-        let target = i;
-        for (let j = i - 1; j >= 0; j--) {
-            if (Array[j] > Array[target]) {
-                [Array[target], Array[j]] = [Array[j],Array[target]];
-                target = j;
-            }
+        if (Array[i] > target) {
+            right.push(Array[i]);
+        } else {
+            left.push(Array[i]);
         }
     }
-    return Array;
+    return quickSort(left).concat(target, quickSort(right));
 };
-let result = insertSort([3, 1, 4, 6, 9, 2, 8]);
+let result = quickSort([6, 1, 2, 7, 9, 3, 4, 5, 10, 8]);
 console.log(result);
