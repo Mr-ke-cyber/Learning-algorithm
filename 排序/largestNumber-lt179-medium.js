@@ -36,5 +36,21 @@ var largestNumber = function(nums) {
     if (nums[0] === 0) return "0"; // 最大值都为0，说明后面的一定都是0
     return nums.join("");
 };
-let result = largestNumber([830,8308]);
+/*更简洁的解法*/
+var largestNumber2 = function(nums) {
+    nums = nums.sort (function(a, b) {
+        let av = a + "" + b;
+        let bv = b + "" + a;
+        if (av > bv) {
+            return -1;
+        } else if (av < bv) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+    if (nums[0] === 0) return "0";
+    return nums.join("");
+};
+let result = largestNumber2([830,8308]);
 console.log(result);
