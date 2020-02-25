@@ -1,17 +1,25 @@
-var insertSort = function (array) {
-    let len = array.length;
-    for (let i = 1; i < len; i++) {
-        let target = i;
-        for (let j = i - 1; j >= 0; j--) {
-            if (array[j] > array[target]) {
-                [array[j], array[target]] = [array[target], array[j]];
-                target = j;
-            } else {
-                break;
-            }
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+    let sLen = s.length;
+    let tLen = t.length;
+    if (sLen !== tLen) return false;
+    let temp1 = Array(26).fill(0);
+    let temp2 = Array(26).fill(0);
+    for (let i = 0; i < sLen; i++) {
+        let curr1 = s[i].charCodeAt(0) - 97;
+        let curr2 = t[i].charCodeAt(0) - 97;
+        temp1[curr1]++;
+        temp2[curr2]++;
+    }
+    for (let j = 0; j < 26; j++) {
+        if (temp1[j] !== temp2[j]) {
+            return false;
         }
     }
-    return array;
+    return true;
 };
-let result = insertSort([2, 7, 4, 6, 9, 1, 8, 22]);
-console.log(result);
+console.log("a".charCodeAt(0));
