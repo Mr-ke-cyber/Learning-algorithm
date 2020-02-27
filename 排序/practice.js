@@ -1,15 +1,17 @@
-var selectionSort = function (array) {
+var quickSort = function (array) {
     let len = array.length;
-    for (let i = 0; i < len; i++) {
-        let minIndex = i;
-        for (let j = i + 1; j < len; j++) {
-            if (array[j] < array[minIndex]) {
-                minIndex = j;
-            }
+    if (len < 2) return array;
+    let left = [];
+    let right = [];
+    let target = array[0];
+    for (let i = 1; i < len; i++) {
+        if (array[i] < target) {
+            left.push(array[i]);
+        } else {
+            right .push(array[i]);
         }
-        [array[i], array[minIndex]] = [array[minIndex], array[i]];
     }
-    return array;
+    return quickSort(left).concat(target, quickSort(right));
 };
-let result = selectionSort([3, 1, 4, 6, 9, 2, 8]);
+let result = quickSort([3, 1, 4, 6, 9, 2, 8]);
 console.log(result);
