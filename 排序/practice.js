@@ -1,17 +1,28 @@
-var insertSort = function (array) {
+var mergeSort = function (array) {
     let len = array.length;
-    for (let i = 1; i < len; i++) {
-        let target = i;
-        for (let j = i - 1; j >= 0; j--) {
-            if (array[j] > array[target]) {
-                [array[j], array[target]] = [array[target], array[j]];
-                target = j;
-            } else {
-                break;
-            }
+    if (len < 2) return array;
+    let mid = len >> 1;
+    let left = array.slice(0, mid);
+    let right = array.slice(mid);
+    return merge(mergeSort(left), mergeSort(right));
+};
+const merge = function (left, right) {
+    const temp = [];
+
+    while (left.length && right.length) {
+        if (left[0] < right[0]) {
+            temp.push(left.shift());
+        } else {
+            temp.push(right.shift());
         }
     }
-    return array;
+    while (left.length) {
+        temp.push(left.shift());
+    }
+    while (right.length) {
+        temp.push(right.shift());
+    }
+    return temp;
 };
-let result = insertSort([1, 2, 4, 6, 9, 1, 8]);
+let result = mergeSort([1, 2, 4, 6, 9, 1, 8]);
 console.log(result);
