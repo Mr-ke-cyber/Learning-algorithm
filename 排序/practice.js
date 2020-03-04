@@ -1,28 +1,27 @@
-var mergeSort = function (array) {
+var bubbleSort = function (array) {
     let len = array.length;
-    if (len < 2) return array;
-    let mid = len >> 1;
-    let left = array.slice(0, mid);
-    let right = array.slice(mid);
-    return merge(mergeSort(left), mergeSort(right));
-};
-const merge = function (left, right) {
-    const temp = [];
-
-    while (left.length && right.length) {
-        if (left[0] < right[0]) {
-            temp.push(left.shift());
-        } else {
-            temp.push(right.shift());
+    for (let i = 0; i < len; i++) {
+        for (let j = i + 1; j < len; j++) {
+            if (array[i] > array[j]) {
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
     }
-    while (left.length) {
-        temp.push(left.shift());
-    }
-    while (right.length) {
-        temp.push(right.shift());
-    }
-    return temp;
+    return array;
 };
-let result = mergeSort([1, 2, 4, 6, 9, 1, 8]);
+var bubbleSort2 = function (array) {
+    let len = array.length;
+    for (let i = 0; i < len; i++) {
+        let complete = true;
+        for (let j = 0; j < len - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                [array[j], array[j + 1]] = [array[j + 1], array[j]];
+                complete = false;
+            }
+        }
+        if (complete) break;
+    }
+    return array;
+};
+let result = bubbleSort([1, 2, 4, 6, 9, 1, 8]);
 console.log(result);
