@@ -23,9 +23,9 @@
  * @param {number[][]} M
  * @return {number}
  */
+/*方法一：DFS*/
 var findCircleNum = function(M) {
     let len = M.length;
-    let res = 0;
     let map = new Map();
     let count = 0;
     const dfs = (i) => {
@@ -44,3 +44,33 @@ var findCircleNum = function(M) {
     }
     return count;
 };
+/*
+方法二：BFS*/
+var findCircleNum2 = function(M) {
+    let len = M.length;
+    let map = new Map();
+    let count = 0;
+    const bfs = (i) => {
+        let queue = [i];
+        while (queue.length) {
+            let curr = queue.shift();
+            for (let j = 0; j < len; j++) {
+                if (M[curr][j] && !map.get(j)) {
+                    queue.push(j);
+                    map.set(j, true);
+                }
+            }
+        }
+    };
+    for (let i = 0; i < len; i++) {
+        if (!map.get(i)) {
+            bfs(i);
+            count++;
+        }
+    }
+    return count;
+};
+
+
+
+
