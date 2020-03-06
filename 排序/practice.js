@@ -1,27 +1,15 @@
-var bubbleSort = function (array) {
+let selectionSort = function (array) {
     let len = array.length;
     for (let i = 0; i < len; i++) {
+        let minIndex = i;
         for (let j = i + 1; j < len; j++) {
-            if (array[i] > array[j]) {
-                [array[i], array[j]] = [array[j], array[i]];
+            if (array[j] < array[minIndex]) {
+                minIndex = j;
             }
         }
+        [array[i], array[minIndex]] = [array[minIndex], array[i]];
     }
     return array;
 };
-var bubbleSort2 = function (array) {
-    let len = array.length;
-    for (let i = 0; i < len; i++) {
-        let complete = true;
-        for (let j = 0; j < len - i - 1; j++) {
-            if (array[j] > array[j + 1]) {
-                [array[j], array[j + 1]] = [array[j + 1], array[j]];
-                complete = false;
-            }
-        }
-        if (complete) break;
-    }
-    return array;
-};
-let result = bubbleSort([1, 2, 4, 6, 9, 1, 8]);
+let result = selectionSort([3, 1, 4, 6, 9, 2, 8]);
 console.log(result);
