@@ -15,6 +15,7 @@
  * @param {number} amount
  * @return {number}
  */
+/*方法一：动态规划*/
 let coinChange = function(coins, amount) {
     let dp = Array(amount + 1).fill(Number.MAX_SAFE_INTEGER);
     dp[0] = 0;
@@ -27,5 +28,22 @@ let coinChange = function(coins, amount) {
     }
     return dp[amount] === Number.MAX_SAFE_INTEGER ? -1 : dp[amount];
 };
-let result = coinChange([3,5], 11);
+/*方法二：DFS*/
+let coinChange2 = function (coins, amount) {
+    const getChange = function (coins, amount, count) {
+        if (amount <= 0) return amount;
+        if (count[amount] !== 0) return count[amount];
+        let min = Number.MAX_VALUE;
+        for (let i = 0; i < coins.length; i++) {
+            let res = getChange(coins, amount - coins[i], count);
+            if (res >= 0 && res < min) {
+                min = 1 + res;
+            }
+        }
+        count[amount] = (min === Number.MAX_VALUE ? -1 : min);
+        return count[amount];
+    };
+    return getChange(coins, amount, Array(amount + 1).fill(0))
+};
+let result = coinChange2([1,3,5], 11);
 console.log(result);
