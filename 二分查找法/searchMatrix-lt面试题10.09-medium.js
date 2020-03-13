@@ -59,6 +59,28 @@ let searchMatrix2 = function (matrix, target) {
     }
     return false;
 };
+//方法三：二分查找法
+let searchMatrix3 = function (matrix, target) {
+    let r = matrix.length;
+    if (!r) return false;
+    let c = matrix[0].length;
+    let l1 = 0;
+    let r1 = r * c - 1;
+    while (l1 <= r1) {
+        let mid = (l1 + r1) >> 1;
+        let sc = mid % c;
+        let sr = (mid - sc) / c;
+        let curr = matrix[sr][sc];
+        if (curr === target) {
+            return true;
+        } else if (curr < target) {
+            l1 = mid + 1;
+        } else {
+            r1 = mid - 1;
+        }
+    }
+    return false;
+};
 let result = searchMatrix2([
     [1,   4,  7, 11, 15],
     [2,   5,  8, 12, 19],
