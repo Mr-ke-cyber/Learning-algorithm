@@ -59,7 +59,7 @@ let searchMatrix2 = function (matrix, target) {
     }
     return false;
 };
-//方法三：二分查找法
+//方法三：二分查找法,不适用于本题，适用于本行第一个整数大于前一行最后一个整数的情况
 let searchMatrix3 = function (matrix, target) {
     let r = matrix.length;
     if (!r) return false;
