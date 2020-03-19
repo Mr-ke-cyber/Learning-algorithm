@@ -46,7 +46,7 @@ var mergeTwoLists2 = function(l1, l2) {
         prev = prev.next;
     }
     prev.next = l1 === null ? l2 : l1;
-    return prev.next;
+    return preHead.next;
 };
  let result = mergeTwoLists2({val:1, next:{val:2,next:{val:4,next:null}}}, {val:1,next:{val:3,next:{val:4,next:null}}});
  console.log(result);
