@@ -1,12 +1,19 @@
-var maxProfit = function (prices) {
-    let len = prices.length;
-    let maxProfit = 0;
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {
+    let len = nums.length;
+    let res = Array(len).fill(1);
     for (let i = 1; i < len; i++) {
-        if (prices[i] > prices[i - 1]) {
-            maxProfit += prices[i] - prices[i - 1];
-        }
+      res[i] = nums[i - 1] * res[i - 1];
     }
-    return maxProfit;
+    let r = 1;
+    for (let j = len - 1; j >= 0; j--) {
+        res[j] = res[j] * r;
+        r *= nums[j];
+    }
+    return res;
 };
-let result = maxProfit([7,1,5,3,6,4]);
-console.log(result);
+let result = productExceptSelf([1,2,3,4]);
+console.log(result, 'jjjj');

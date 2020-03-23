@@ -1,15 +1,21 @@
-let quickSort = function (array) {
-    let len = array.length;
-    if (len < 2) return array;
-    let t = array[0], left = [], right = [];
-    for (let i = 1; i < len; i++) {
-        if (array[i] > t) {
-            right.push(array[i]);
-        } else {
-            left.push(array[i]);
+/**
+ * @param {number[]} A
+ * @return {number}
+ */
+var minIncrementForUnique = function(A) {
+    let len = A.length;
+    A = A.sort((a, b) => a - b);
+    let res = 0;
+    let i = 1;
+    while (i < len) {
+        if (A[i] <= A[i - 1]) {
+            let n = A[i - 1] + 1 - A[i];
+            A[i] += n;
+            res += n;
         }
+        i++;
     }
-    return quickSort(left).concat(t, quickSort(right));
+    return res;
 };
-let result = quickSort([1, 3, 1, 4, 6, 9, 2, 8]);
+let result = minIncrementForUnique([3,2,1,2,1,7]);
 console.log(result);

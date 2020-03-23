@@ -23,7 +23,7 @@ let inorderTraversal = function (root, array = []) {
 };
 
 /*DFS实现*/
-let inorderTraversal2 = function (root, array=[]) {
+let inorderTraversal2 = function (root) {
     const stack = [];
     const result = [];
     let   current = root;
@@ -36,6 +36,7 @@ let inorderTraversal2 = function (root, array=[]) {
         result.push(current.val);
         current = current.right;
     }
+    return result;
 };
 
 

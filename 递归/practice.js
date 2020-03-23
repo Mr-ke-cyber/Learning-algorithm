@@ -1,26 +1,20 @@
-let deepClone = function (target, map = new WeakMap()) {
-    if (typeof target === 'object') {
-        if (map.has(target)) return map.get(target);
-        let obj = Array.isArray(target) ? [] : {};
-        map.set(target, obj);
-        for (let key in target) {
-            obj[key] = deepClone(target[key], map);
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isHappy = function(n) {
+    let set = new Set(), sum
+    n += ''
+    while (sum !== 1) {
+        sum = 0
+        for (let i = 0; i < n.length; i++) {
+            sum += n[i]*n[i]
         }
-        return obj;
-    } else {
-        return target;
+        n = sum + ''
+        if (set.has(sum)) return false
+        set.add(sum)
     }
+    return true
 };
-const target = {
-    field1: 1,
-    field2: undefined,
-    field3: {
-        child: 'child'
-    },
-    field4: [2, 4, 8],
-    name:'hello'
-};
-target.target = target;
-let result = deepClone(target);
-result.name = 'hihi';
-console.log(result, 'jkkk',target);
+let result = isHappy(19);
+console.log(result)
