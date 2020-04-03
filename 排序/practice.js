@@ -1,21 +1,17 @@
-/**
- * @param {number[]} A
- * @return {number}
- */
-var minIncrementForUnique = function(A) {
-    let len = A.length;
-    A = A.sort((a, b) => a - b);
-    let res = 0;
-    let i = 1;
-    while (i < len) {
-        if (A[i] <= A[i - 1]) {
-            let n = A[i - 1] + 1 - A[i];
-            A[i] += n;
-            res += n;
+let insertSort = function (arr) {
+    let len = arr.length;
+    for (let i = 1; i < len; i++) {
+        let target = i;
+        for (let j = i - 1; j >= 0; j--) {
+            if (arr[j] > arr[target]){
+                [arr[j], arr[target]] = [arr[target], arr[j]];
+                target = j;
+            } else {
+                break;
+            }
         }
-        i++;
     }
-    return res;
+    return arr;
 };
-let result = minIncrementForUnique([3,2,1,2,1,7]);
+let result = insertSort([2, 7, 4, 6, 9, 1, 8, 22]);
 console.log(result);
