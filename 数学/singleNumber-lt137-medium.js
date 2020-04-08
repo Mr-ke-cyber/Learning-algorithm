@@ -12,6 +12,7 @@
  * @return {number}
  * 
  */
+/*方法一：根据和差*/
 var singleNumber = function(nums) {
     const getSum = function (arr) {
         return arr.reduce((curr, next) => curr + next);
@@ -19,6 +20,13 @@ var singleNumber = function(nums) {
     let temp = nums.slice();
     nums = [...new Set(nums)];
     return (3 * getSum(nums) - getSum(temp)) / 2;
+};
+/*方法二：高级的异或解法，一次遍历完成，主要考察异或这个知识点*/
+function singleNumber2(nums) {
+    for (let i = 1; i < nums.length; i++) {
+        nums[0] ^= nums[i];
+    }
+    return nums[0];
 };
 let result = singleNumber([0,1,0,1,0,1,99]);
 console.log(result);
