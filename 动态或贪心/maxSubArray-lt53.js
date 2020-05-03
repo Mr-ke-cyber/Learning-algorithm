@@ -12,15 +12,15 @@
 var maxSubArrayLt53 = function(nums) {
     let len = nums.length;
     let dp = Array(len).fill(0);
-    let maxSum = nums[0];
+    let res = nums[0];
     dp[0] = nums[0];
     for (let i = 1; i < len; i++) {
-        dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
-        if (dp[i] > maxSum) {
-            maxSum = dp[i];
+        dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]); // dp[i] 表示以nums[i]为结尾的元素的最大和的连续子数组
+        if (dp[i] > res) {
+            res = dp[i];
         }
     }
-    return maxSum;
+    return res;
 };
 let result = maxSubArrayLt53([-3,4,-1,2,1,-5,4]);
 console.log(result);
