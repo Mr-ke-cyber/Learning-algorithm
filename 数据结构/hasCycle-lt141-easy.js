@@ -28,6 +28,7 @@
  * @return {boolean}
  */
 /*方法一：数组*/
+
 var hasCycle = function(head) {
     let res = [];
     while (head !== null) {

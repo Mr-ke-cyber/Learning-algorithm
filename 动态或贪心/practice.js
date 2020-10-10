@@ -1,19 +1,14 @@
 /**
- * @param {number[]} nums
- * @return {number[]}
+ * @param {number[]} cost
+ * @return {number}
  */
-var productExceptSelf = function(nums) {
-    let len = nums.length;
-    let res = Array(len).fill(1);
-    for (let i = 1; i < len; i++) {
-      res[i] = nums[i - 1] * res[i - 1];
+var minCostClimbingStairs = function(cost) {
+    let len = cost.length;
+    let dp = Array(len + 1).fill(0);
+    for (let i = 2; i <= len; i++) {
+        dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
     }
-    let r = 1;
-    for (let j = len - 1; j >= 0; j--) {
-        res[j] = res[j] * r;
-        r *= nums[j];
-    }
-    return res;
+    return dp[len];
 };
-let result = productExceptSelf([1,2,3,4]);
-console.log(result, 'jjjj');
+let result = minCostClimbingStairs([0,1,2,0]);
+console.log(result, 'jk');
