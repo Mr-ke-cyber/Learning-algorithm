@@ -40,7 +40,7 @@ var commonChars = function(A) {
 };
 // 解法二：计数法
 var commonChars2 = function (A) {
-    let minArr = new Array(26).fill(Number.MAX_SAFE_INTEGER);
+    let minArr = new Array(26).fill(0);
     let result = [];
     A.forEach((item) => {
         let arr = new Array(26).fill(0);
