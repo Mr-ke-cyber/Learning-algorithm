@@ -21,8 +21,8 @@
  * @param {Node} root
  * @return {Node}
  */
-// 递归解法
-var connect = function(root) {
+// BFS解法
+var connect1 = function(root) {
     if (!root) {
         return root;
     }
@@ -44,4 +44,36 @@ var connect = function(root) {
     }
     return root;
 };
+// 使用已建立的next指针解法
+var connect2 = function(root) {
+    if(root) {
+        let leftMost = root;
+        while (leftMost && leftMost.left) {
+            let head = leftMost;
+            while(head) {
+                head.left.next = head.right;
+                head.right.next = head.next ? head.next.left : null;
+                head = head.next;
+            }
+            leftMost = leftMost.left;
+        }
+    }
+    return root;
+};
+// 递归解法
+var connect3 = function(root) {
+    if(root) {
+        const connect = (a, b) => {
+            if(!a){
+                return;
+            }
+            a.next = b;
+            connect(a.left, a.right);
+            connect(a.right, a.next? a.next.left : null);
+        };
+        connect(root, null);
+    }
+    return root;
+};
+
 
