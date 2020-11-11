@@ -28,3 +28,4 @@ var reverseList = function(head) {
 };
 let result = reverseList({val:1, next:{val:2,next:{val:4,next:null}}});
 console.log(result);
+
