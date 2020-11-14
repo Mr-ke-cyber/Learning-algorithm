@@ -1,14 +1,29 @@
 /**
- * @param {number[]} cost
+ * @param {number[]} nums
  * @return {number}
  */
-var minCostClimbingStairs = function(cost) {
-    let len = cost.length;
-    let dp = Array(len + 1).fill(0);
-    for (let i = 2; i <= len; i++) {
-        dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+var findNumberOfLIS = function(nums) {
+    let len = nums.length;
+    let dp = Array(len).fill(1);
+    let count = Array(len).fill(1);
+    for (let i = 1; i < len; i++) {
+        for (let j = 0; j < i; j++) {
+            if (nums[j] < nums[i]) {
+                if (dp[j] + 1 > dp[i]) {
+                    count[i] = count[j];
+                    dp[i] = dp[j] + 1;
+                } else if (dp[j] + 1 === dp[i]) {
+                    count[i] += count[j];
+                }
+            }
+        }
     }
-    return dp[len];
+    let ans = 0;
+    let longest = Math.max(...dp);
+    for (let k = 0; k < len; k++) {
+        if (dp[k] === longest) {
+            ans += count[k];
+        }
+    }
+    return ans;
 };
-let result = minCostClimbingStairs([0,1,2,0]);
-console.log(result, 'jk');
