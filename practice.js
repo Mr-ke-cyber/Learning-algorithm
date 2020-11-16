@@ -1,21 +1,31 @@
 /**
  * @param {number[]} nums
+ * @param {number} x
  * @return {number}
  */
-var findLengthOfLCIS = function(nums) {
-    let result = 1;
-    let temp = 1;
-    let i = 1;
-    while (i < nums.length) {
-        if (nums[i] > nums[i - 1]) {
-            temp++;
-        } else {
-            result = Math.max(temp, result);
-            temp = 1;
+var minOperations = function(nums, x) {
+    const dfs = (arr, y, result) => {
+        if (y < 0) {
+            result = [];
+            return;
         }
-        i++;
-    }
-    return Math.max(result, temp);
+        if (y === 0) {
+            return result;
+        } else {
+            result.push(arr[0]);
+            y -= arr[0];
+            arr.shift();
+            dfs(arr, y, result);
+
+            result.push(arr[arr.length - 1]);
+            y -= arr[arr.length - 1];
+            arr.pop();
+            dfs(arr, y, result);
+        }
+    };
+    let res = [];
+    dfs(nums, x, res);
+    console.log(res, 'res');
 };
-let result = findLengthOfLCIS([1,3,5,7]);
-console.log(result, 'j');
+let result = minOperations([5,6,7,8,9], 9);
+console.log(result, 'resss')
