@@ -1,13 +1,40 @@
 /**
- * @param {number[][]} points
- * @param {number} K
- * @return {number[][]}
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
  */
-var kClosest = function(points, K) {
-    points.sort((a, b) => {
-        return (a[0] * a[0] + a[1] * a[1]) - (b[0] * b[0] + b[1] * b[1]);
-    });
-    return points.slice(0, K);
+/**
+ * @param {number} n
+ * @return {TreeNode[]}
+ */
+var generateTrees = function(n) {
+    function TreeNode(val, left, right) {
+        this.val = (val===undefined ? 0 : val)
+        this.left = (left===undefined ? null : left)
+        this.right = (right===undefined ? null : right)
+    }
+    function buildTree(start, end) {
+        let ans = [];
+        if (start > end) return [null];
+        for (let i = start; i <= end; i++) {
+            let leftNodes = buildTree(start, i - 1);
+            let rightNodes = buildTree(i + 1, end);
+            for (const leftNode of leftNodes) {
+                for (const rightNode of rightNodes) {
+                    let cur = new TreeNode(i);
+                    cur.left = leftNode;
+                    cur.right = rightNode;
+                    ans.push(cur);
+                }
+            }
+        }
+        return ans;
+    }
+    if (n === 0) return [];
+    return buildTree(1, n);
 };
-const result = kClosest([[3, 3], [5, -1], [-2, 4]], 2);
-console.log(result, 'result')
+let result = generateTrees(3);
+console.log(result, 'jk')
