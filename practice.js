@@ -1,31 +1,35 @@
 /**
- * @param {number[]} nums
- * @param {number} x
- * @return {number}
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
  */
-var minOperations = function(nums, x) {
-    const dfs = (arr, y, result) => {
-        if (y < 0) {
-            result = [];
+/**
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {number[][]}
+ */
+var pathSum = function(root, sum) {
+    let res = [];
+    const dfs = (node, currSum, tempPath) => {
+        if (!node) {
             return;
         }
-        if (y === 0) {
-            return result;
-        } else {
-            result.push(arr[0]);
-            y -= arr[0];
-            arr.shift();
-            dfs(arr, y, result);
-
-            result.push(arr[arr.length - 1]);
-            y -= arr[arr.length - 1];
-            arr.pop();
-            dfs(arr, y, result);
+        currSum += node.val;
+        tempPath.push(node.val);
+        if (currSum === sum && !node.left && !node.right) {
+            res.push(tempPath);
+        }
+        if(node.left) {
+            dfs(node.left, currSum, tempPath.slice());
+        }
+        if (node.right) {
+            dfs(node.right, currSum, tempPath.slice());
         }
     };
-    let res = [];
-    dfs(nums, x, res);
-    console.log(res, 'res');
+    dfs(root, 0, []);
+    return res;
 };
-let result = minOperations([5,6,7,8,9], 9);
-console.log(result, 'resss')
+let result = pathSum({val: -2, left: null, right: {val: -3}}, -5);
+console.log(result, 'jk')

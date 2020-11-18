@@ -26,6 +26,7 @@
  * @param {number} sum
  * @return {number[][]}
  */
+// 方法一：回溯
 var pathSum = function(root, sum) {
     if (!root) return [];
     let res = [];
@@ -43,5 +44,25 @@ var pathSum = function(root, sum) {
         tempPath.pop();
     };
     backtrack(root, tempPath, sum);
+    return res;
+};
+// 方法二：DFS
+var pathSum2 = function(root, sum) {
+    if (!root) return [];
+    let res = [];
+    let temp = [];
+    const dfs = (node, sum) => {
+        if (!node){
+            return;
+        }
+        temp.push(node.val);
+        sum -= node.val;
+        if (sum === 0 && !node.left && !node.right) {
+            res.push(temp);
+        }
+        dfs(node.left, sum);
+        dfs(node.right, sum);
+    };
+    dfs(root, sum);
     return res;
 };

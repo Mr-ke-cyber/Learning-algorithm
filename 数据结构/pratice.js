@@ -1,40 +1,42 @@
 /**
  * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
  * }
  */
 /**
- * @param {number} n
- * @return {TreeNode[]}
+ * @param {TreeNode} root
+ * @return {string[]}
  */
-var generateTrees = function(n) {
-    function TreeNode(val, left, right) {
-        this.val = (val===undefined ? 0 : val)
-        this.left = (left===undefined ? null : left)
-        this.right = (right===undefined ? null : right)
+var binaryTreePaths = function(root) {
+    if (!root) {
+        return root;
     }
-    function buildTree(start, end) {
-        let ans = [];
-        if (start > end) return [null];
-        for (let i = start; i <= end; i++) {
-            let leftNodes = buildTree(start, i - 1);
-            let rightNodes = buildTree(i + 1, end);
-            for (const leftNode of leftNodes) {
-                for (const rightNode of rightNodes) {
-                    let cur = new TreeNode(i);
-                    cur.left = leftNode;
-                    cur.right = rightNode;
-                    ans.push(cur);
-                }
-            }
+    let res = [];
+    const backTrace = (node, tempPath) => {
+        if (!node) {
+            return;
         }
-        return ans;
-    }
-    if (n === 0) return [];
-    return buildTree(1, n);
+        tempPath.push(node.val);
+        if (!node.left && !node.right){
+            res.push(tempPath.slice());
+        }
+        if(node.left) {
+            backTrace(node.left, tempPath);
+            tempPath.pop();
+        }
+        if(node.right) {
+            backTrace(node.right, tempPath);
+            tempPath.pop();
+        }
+    };
+    backTrace(root, []);
+    res = res.map((item) => {
+        return item.join("->")
+    });
+    console.log(res, 'kk')
+    return res;
 };
-let result = generateTrees(3);
-console.log(result, 'jk')
+binaryTreePaths();
+let result = binaryTreePaths({val: 1, left:{val: 2, left: null,right: {val: 5,left: null,right: null}}, right: {val: 3, left: null, right: null}});
