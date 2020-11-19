@@ -1,32 +1,17 @@
 /**
- * @param {number} s
  * @param {number[]} nums
- * @return {number}
+ * @return {void} Do not return anything, modify nums in-place instead.
  */
-var minSubArrayLen = function(s, nums) {
-    if (!nums.length) return 0;
-    let i = 0, j = 0;
-    let currSum = nums[i];
-    let curr = [nums[i]];
-    let min = Number.MAX_SAFE_INTEGER;
-    let result = [];
-    while (j < nums.length) {
-        if (currSum < s) {
-            j++;
-            currSum += nums[j];
-            curr.push(nums[j]);
-        } else {
-            while(currSum >= s) {
-                if (curr.length < min) {
-                    result = curr.slice();
-                    min = result.length;
-                }
-                currSum -= curr.shift();
-                i++;
-            }
+var moveZeroes = function(nums) {
+    let len = nums.length;
+    let l = 0, r = 0;
+    while (r < len) {
+        if (nums[r]) {
+            [nums[l], nums[r]] = [nums[r], nums[l]];
+            l++;
         }
+        r++;
     }
-    return result;
 };
-let result = minSubArrayLen(100, [2, 3, 1, 2, 4, 3]);
-console.log(result, 'result')
+let result = moveZeroes([0,1,0,3,12]);
+console.log(result, 'jk')
