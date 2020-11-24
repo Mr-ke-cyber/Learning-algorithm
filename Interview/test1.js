@@ -8,7 +8,7 @@
 // 双指针 + 递归解法
 const decodeString = str => {
       let checkStr = str.match(/\d+/g);
-      if (!checkStr) {    // 递归结束条件 说明没有未“拍平”的地方了
+      if (!checkStr) {    // 递归结束条件 说明没有未“拍平”的地方了,可返回结果
           return str;
       }
       let len = str.length;

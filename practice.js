@@ -1,35 +1,16 @@
 /**
- * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
- * }
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
  */
-/**
- * @param {TreeNode} root
- * @param {number} sum
- * @return {number[][]}
- */
-var pathSum = function(root, sum) {
-    let res = [];
-    const dfs = (node, currSum, tempPath) => {
-        if (!node) {
-            return;
+var twoSum = function(nums, target) {
+    let map = new Map();
+    for(let i = 0; i < nums.length; i++) {
+        map.set(nums[i], i);
+        let t = target - nums[i];
+        if (map.has(t)) {
+            return [i, map.get(t)];
         }
-        currSum += node.val;
-        tempPath.push(node.val);
-        if (currSum === sum && !node.left && !node.right) {
-            res.push(tempPath);
-        }
-        if(node.left) {
-            dfs(node.left, currSum, tempPath.slice());
-        }
-        if (node.right) {
-            dfs(node.right, currSum, tempPath.slice());
-        }
-    };
-    dfs(root, 0, []);
-    return res;
+    }
+    return [];
 };
-let result = pathSum({val: -2, left: null, right: {val: -3}}, -5);
-console.log(result, 'jk')
