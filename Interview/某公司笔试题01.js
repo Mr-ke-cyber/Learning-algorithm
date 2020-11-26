@@ -33,7 +33,7 @@ function mapKeysToCamelCase (data) {
 // 这种解法能达到预期效果吗？并不能，它将value也给替换成了驼峰了，题目只要求将key换成驼峰，并且a_d_s这种属性名也替换成了aDS了,所以是错误示范。
 /*我们来看正确写法*/
 function mapKeysToCamelCase2 (data) {
-    let temp = {};
+    let temp = Array.isArray(data) ? [] : {};
     for (let key in data) {
         if (data.hasOwnProperty(key)) {
             let i = 0;
@@ -52,7 +52,7 @@ function mapKeysToCamelCase2 (data) {
                 }
                 i++;
             }
-            temp[nk] = data[key];
+            temp[nk] = typeof data[key] === "object" ? mapKeysToCamelCase2(data[key]) : data[key];
         }
     }
     return temp;
