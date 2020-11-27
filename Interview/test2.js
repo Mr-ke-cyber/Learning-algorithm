@@ -13,5 +13,21 @@ const foo = (arr) => {
     dfs(arr, "");
     return res.join(',');
 };
-let result = foo([['A', 'B'], ['a', 'b'], [1, 2]]);
+// reduce解法
+const foo2 = (arr) => {
+    let res = arr.reduce((prev, curr) => {
+        if (!prev.length) {
+            return curr;
+        }
+        let temp = [];
+        for (let j = 0; j < prev.length; j++) {
+            temp.push(prev[j] + curr[0]);
+            temp.push(prev[j] + curr[1]);
+        }
+        return temp;
+    }, []);
+    return res.join(',');
+};
+
+let result = foo2([['A', 'B'], ['a', 'b'], [1, 2]]);
 console.log(result);
