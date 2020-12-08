@@ -1,4 +1,4 @@
-/***来自有赞***
+/***来自某赞***
  * 将一个json数据的所有key从下划线改为驼峰
  * @param {object | array} value 待处理对象或数组
  * @return {object | array} 处理后的对象或数组
